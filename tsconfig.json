@@ -3,9 +3,27 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@services/*": [
+        "./src/services/*"
+      ],
+      "@types/*": [
+        "./src/types/*"
+      ],
+      "@store/*": [
+        "./src/store/*"
+      ],
+      "@pages/*": [
+        "./src/pages/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
       "@/*": [
         "./*"
-      ]
+      ],
     }
   },
   "include": [
