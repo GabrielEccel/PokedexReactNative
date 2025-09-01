@@ -7,7 +7,7 @@ import { generationMap } from '@utils/genUtils';
 import { sanitize, upperCase } from '@utils/stringUtils';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function Details() {
   const { id } = useLocalSearchParams();
@@ -111,6 +111,9 @@ export default function Details() {
 
   return (
     <ScrollView style={styles.container}>
+    <TouchableOpacity style={styles.back} onPress={router.back}>
+      <Feather name='arrow-left' size={22}/>
+    </TouchableOpacity>
       <View style={styles.card}>
         <View style={styles.info}>
           <View style={styles.imgView}>
@@ -181,6 +184,10 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 15,
     paddingTop: 50,
+  },
+  back:{
+    margin: 6,
+    width: 25,
   },
   card: {
     backgroundColor: 'rgba(208,208,208, 0.4)',
