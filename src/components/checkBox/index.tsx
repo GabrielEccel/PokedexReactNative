@@ -1,5 +1,6 @@
 import { Feather } from '@expo/vector-icons';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
+import { checkBoxStyles as styles } from './checkboxStyles';
 
 interface CheckBoxProps{
     label: string,
@@ -18,13 +19,3 @@ export default function CheckBox({label, checked, ontoggle}:CheckBoxProps) {
    </View>
   );
 }
-
-const styles = StyleSheet.create({
-    container:{
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    label:{
-        marginRight: 5
-    }
-})

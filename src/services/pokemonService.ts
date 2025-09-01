@@ -29,7 +29,7 @@ async function getPokemon(id: number | string): Promise<InterfacePokemon> {
     }
 }
 
-async function getTypeService(id: number | string): Promise<InterfaceType> {
+async function getType(id: number | string): Promise<InterfaceType> {
     try {
         const response = await api.get(`type/${id}`)
         return response.data as InterfaceType
@@ -51,5 +51,5 @@ async function getEvelotionChain(id: number | string): Promise<InterfaceEvolutio
     }
 }
 
-export { getEvelotionChain, getPokemon, getPokemonSpecies, getTypeService }
+export { getEvelotionChain, getPokemon, getPokemonSpecies, getType }
 

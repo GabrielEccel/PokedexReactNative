@@ -10,8 +10,8 @@ interface PokemonState {
   showAll: boolean;
   selectedGens: InterfaceGen[];
 
-  setVisiblePokemon: (pokemons: InterfacePokemon[]) => void;
-  addVisiblePokemon: (pokemons: InterfacePokemon[]) => void;
+  setVisiblePokemon: (pokemon: InterfacePokemon[]) => void;
+  addVisiblePokemon: (pokemon: InterfacePokemon[]) => void;
   setPage: (page: number) => void;
   setHasMore: (value: boolean) => void;
   setLoading: (value: boolean) => void;
@@ -27,8 +27,8 @@ export const usePokemonStore = create<PokemonState>((set) => ({
   showAll: false,
   selectedGens: [],
 
-  setVisiblePokemon: (pokemons) => set({ visiblePokemon: pokemons }),
-  addVisiblePokemon: (pokemons) => set((state) => ({ visiblePokemon: [...state.visiblePokemon, ...pokemons] })),
+  setVisiblePokemon: (pokemon) => set({ visiblePokemon: pokemon }),
+  addVisiblePokemon: (pokemon) => set((state) => ({ visiblePokemon: [...state.visiblePokemon, ...pokemon] })),
   setPage: (page) => set({ page }),
   setHasMore: (value) => set({ hasMore: value }),
   setLoading: (value) => set({ loading: value }),
