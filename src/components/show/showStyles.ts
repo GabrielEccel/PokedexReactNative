@@ -6,7 +6,7 @@ export const showStyles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'grey',
         borderRadius: 8,
-        margin: 6
+        margin: 6,
     },
     pokemonImg: {
         width: Dimensions.get('window').width * 0.3,
@@ -14,4 +14,7 @@ export const showStyles = StyleSheet.create({
         backgroundColor: 'rgba(208,208,208, 0.4)',
         borderRadius: 8
     },
+    title:{
+        textAlign: 'center'
+    }
 })

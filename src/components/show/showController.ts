@@ -1,5 +1,6 @@
 import { InterfacePokemon } from "@/src/types/interfacePokemon";
-import { getPokemon } from "@services/pokemonService";
+import { getPokemon, getPokemonSpecies } from "@services/pokemonService";
+import { formatGender, upperCase } from "@utils/stringUtils";
 import { useEffect, useState } from "react";
 
 export function useShowController(id: string){
@@ -12,8 +13,10 @@ export function useShowController(id: string){
     async function buildPokemon() {
         if (!id) return;
         try {
-            const response = await getPokemon(id.toString())
-            setPokemon(response)
+            console.log(id)
+            const responseSpecies = await getPokemonSpecies(id)
+            const responsePokemon = await getPokemon(responseSpecies.id)
+            setPokemon(responsePokemon)
         } catch (error) {
             console.log(error)
         } finally {
@@ -21,7 +24,14 @@ export function useShowController(id: string){
         }
     }
 
+    function format(text: string = " "){
+        if(!text) return " ";
+
+        return formatGender(upperCase(text))
+
+    }
+
     return{
-        pokemon
+        pokemon, format
     }
 }

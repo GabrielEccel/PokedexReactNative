@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const homeStyles = StyleSheet.create({
+export const favoritesStyles = StyleSheet.create({
     container: {
         flex: 1
     },
@@ -33,14 +33,9 @@ export const homeStyles = StyleSheet.create({
         backgroundColor: '#4630EB',
         borderRadius: 16
     },
-    showAll: {
+        showAll: {
         fontWeight: 'bold',
         fontSize: 16,
-    },
-    loading: {
-        alignItems: 'center',
-        marginTop: 16,
-        marginBottom: 16,
     },
     options: {
         flexDirection: 'row',
@@ -48,41 +43,4 @@ export const homeStyles = StyleSheet.create({
         alignItems: 'center',
         padding: 16,
     },
-    filter: {
-        backgroundColor: '#e4e4e4ff',
-        width: '50%',
-        padding: 20,
-        marginTop: 136,
-        borderBottomLeftRadius: 16
-    },
-    filterTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 20
-    },
-    filterSubTitle: {
-        fontSize: 16,
-        marginBottom: 12
-    },
-    checkbox: {
-        flexDirection: 'row',
-        marginBottom: 10,
-    },
-    buttonView: {
-        alignItems: 'center',
-        marginTop: 24
-    },
-    buttonApply: {
-        backgroundColor: '#4630EB',
-        height: 30,
-        width: 120,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 16
-    },
-    applyText: {
-        fontSize: 14,
-        fontWeight: 'bold',
-        color: 'white'
-    }
 })

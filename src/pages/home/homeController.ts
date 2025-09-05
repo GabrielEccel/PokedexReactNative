@@ -1,5 +1,5 @@
 import { InterfaceGen } from "@/src/types/interfaceGen";
-import { getPokemon } from "@services/pokemonService";
+import { getPokemon, getPokemonSpecies } from "@services/pokemonService";
 import { usePokemonStore } from "@store/pokemonStore";
 import { useEffect, useRef, useState } from "react";
 import { FlatList } from "react-native";
@@ -33,7 +33,7 @@ export function useHomeController() {
         { gen: 'G5', firstId: 495, lastId: 649 },
         { gen: 'G6', firstId: 650, lastId: 721 },
         { gen: 'G7', firstId: 722, lastId: 809 },
-        { gen: 'G8', firstId: 810, lastId: 908 },
+        { gen: 'G8', firstId: 810, lastId: 905 },
         { gen: 'G9', firstId: 906, lastId: 1025 },
     ]
 
@@ -65,8 +65,9 @@ export function useHomeController() {
         try {
             setLoading(true)
             await new Promise(r => setTimeout(r, 1000));
-            const response = await getPokemon(pokemon)
-            setVisiblePokemon([response]);
+            const responseSpecies = await getPokemonSpecies(pokemon)
+            const responsePokemon = await getPokemon(responseSpecies.id)
+            setVisiblePokemon([responsePokemon]);
 
         } catch (error) {
             console.log(error);

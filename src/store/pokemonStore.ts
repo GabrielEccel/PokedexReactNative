@@ -24,7 +24,7 @@ export const usePokemonStore = create<PokemonState>((set) => ({
   page: 1,
   hasMore: true,
   loading: false,
-  showAll: false,
+  showAll: false, 
   selectedGens: [],
 
   setVisiblePokemon: (pokemon) => set({ visiblePokemon: pokemon }),

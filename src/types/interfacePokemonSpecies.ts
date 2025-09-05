@@ -10,5 +10,6 @@ export interface InterfacePokemonSpecies {
     }
     evolution_chain:{
         url: string
-    }
+    },
+    id: number
 }

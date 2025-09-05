@@ -6,7 +6,7 @@ export const detailsStyles = StyleSheet.create({
     padding: 15,
     paddingTop: 50,
   },
-  back:{
+  back: {
     margin: 6,
     width: 25,
   },
@@ -29,7 +29,12 @@ export const detailsStyles = StyleSheet.create({
     justifyContent: 'center',
     marginRight: 8,
     backgroundColor: 'rgba(208,208,208, 1)',
-    borderRadius: 8
+    borderRadius: 8,
+    position: 'relative'
+  },
+  star: {
+    position: 'absolute',
+    margin: 8
   },
   image: {
     width: 150,

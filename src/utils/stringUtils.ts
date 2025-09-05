@@ -1,5 +1,5 @@
 function upperCase(text: string) {
-    if (!text) return;
+    if (!text) return '';
 
     return text.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 }
@@ -9,7 +9,17 @@ function sanitize(text: string){
     return text.replace(/[\n\f]/g, ' ').replace(/[é]/g, 'E');
 }
 
-export {
-    sanitize, upperCase
-};
+function formatName(text: string){
+    if(!text) return '';
+
+    return text.toLowerCase().trim()
+}
+
+function formatGender(text: string){
+    if(!text) return '';
+
+    return text //.replace(/-m/g, ' Macho').replace(/-f/g, ' Fêmea')
+}
+
+export { formatGender, formatName, sanitize, upperCase };
 

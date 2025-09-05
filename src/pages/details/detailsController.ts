@@ -1,13 +1,15 @@
 import { InterfaceEvolutionDetail, InterfaceEvolutionLayer } from "@/src/types/interfaceEvolutionChain";
 import { InterfacePokemon } from "@/src/types/interfacePokemon";
 import { getEvelotionChain, getPokemon, getPokemonSpecies, getType } from "@services/pokemonService";
-import { useTypeStore } from "@store/typestore";
+import { useFavoritesStore } from "@store/favoritesStore";
+import { useTypeStore } from "@store/typeStore";
 import { generationMap } from "@utils/genUtils";
 import { sanitize } from "@utils/stringUtils";
 import { useLocalSearchParams } from "expo-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function useDetailsController() {
+    const { favoritePokemons, setFavoritePokemons } = useFavoritesStore();
     const { typesMap, setTypeLink } = useTypeStore();
     const { id } = useLocalSearchParams();
     const [loading, setLoading] = useState(true);
@@ -16,6 +18,8 @@ export function useDetailsController() {
     const [types, setTypes] = useState<string[]>([]);
     const [desc, setDesc] = useState('');
     const [chain, setChain] = useState<InterfaceEvolutionLayer[][]>([])
+    const [favorites, setFavorites] = useState<InterfacePokemon[]>(() => favoritePokemons)
+    const firstRender = useRef(true);
 
     useEffect(() => {
         buildPokemon();
@@ -25,6 +29,15 @@ export function useDetailsController() {
         getInfo();
 
     }, [pokemon])
+
+    useEffect(() => {
+        if (firstRender.current) {
+            firstRender.current = false;
+            return;
+        }
+        favorites.sort((a,b) => a.id - b.id)
+        setFavoritePokemons(favorites);
+    }, [favorites]);
 
     async function buildPokemon() {
         if (!id) return;
@@ -75,7 +88,6 @@ export function useDetailsController() {
             setChain(list)
 
             const typesInit = pokemon?.types.map(item => item.type.name).join(' ').split(' ');
-            const imgTypes = [];
 
             if (typesInit?.length) {
                 const typePromises = typesInit.map(async (item) => {
@@ -85,7 +97,7 @@ export function useDetailsController() {
                         setTypeLink(item.toString(), link.toString())
                         return link
                     }
-                    else{
+                    else {
                         return typesMap[item]
                     }
                 })
@@ -103,13 +115,28 @@ export function useDetailsController() {
         }
     }
 
+    function toggleFavorite() {
+        if (!pokemon) return;
+
+        const pokeID = Number(id)
+
+        if (favorites.some(p => p.id === pokeID)) {
+            setFavorites(favorites.filter(favId => favId.id !== pokeID))
+        } else {
+            setFavorites([...favorites, pokemon])
+        }
+
+    }
+
     return {
         loading,
         pokemon,
         gen,
         types,
         desc,
-        chain
+        chain,
+        favorites,
+        toggleFavorite
     }
 }
 

@@ -1,4 +1,5 @@
 import ShowPokemon from '@components/show';
+import Star from '@components/star';
 import { Feather } from '@expo/vector-icons';
 import { upperCase } from '@utils/stringUtils';
 import { router } from 'expo-router';
@@ -6,8 +7,9 @@ import { ActivityIndicator, Image, ScrollView, Text, TouchableOpacity, View } fr
 import { useDetailsController } from './detailsController';
 import { detailsStyles as styles } from './detailsStyles';
 
+
 export default function Details() {
-  const {loading, pokemon, chain, gen, types, desc} = useDetailsController()
+  const { loading, pokemon, chain, gen, types, desc, toggleFavorite, favorites } = useDetailsController()
 
   if (loading) {
     return (
@@ -15,19 +17,26 @@ export default function Details() {
     )
   }
 
+  if(!pokemon)return;
+
   return (
     <ScrollView style={styles.container}>
-    <TouchableOpacity style={styles.back} onPress={router.back}>
-      <Feather name='arrow-left' size={22}/>
-    </TouchableOpacity>
+      <TouchableOpacity style={styles.back} onPress={router.back}>
+        <Feather name='arrow-left' size={22} />
+      </TouchableOpacity>
       <View style={styles.card}>
         <View style={styles.info}>
-          <View style={styles.imgView}>
-            <Image
-              source={{ uri: pokemon?.sprites.front_default }}
-              style={styles.image}
-              resizeMode="contain"
-            />
+          <View>
+            <View style={styles.imgView}>
+              <Image
+                source={{ uri: pokemon?.sprites.front_default }}
+                style={styles.image}
+                resizeMode="contain"
+              />
+            </View>
+            <View style={styles.star}>
+              <Star checked={favorites.some(p => p.id === pokemon.id)} onToogle={toggleFavorite}/>
+            </View>
           </View>
           <View style={styles.content}>
             <Text>#{pokemon?.id} - {upperCase(pokemon?.name ?? '')}</Text>
@@ -70,7 +79,7 @@ export default function Details() {
                     toggle={() =>
                       router.push({
                         pathname: '/details',
-                        params: { id: item.name.toString() }
+                        params: { id: item.name }
                       })
                     }
                   />

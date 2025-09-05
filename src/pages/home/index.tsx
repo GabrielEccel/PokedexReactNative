@@ -1,6 +1,7 @@
 import CheckBox from '@components/checkBox';
 import ShowPokemon from '@components/show';
 import { Feather } from '@expo/vector-icons';
+import { DrawerToggleButton } from '@react-navigation/drawer';
 import { router } from 'expo-router';
 import { ActivityIndicator, FlatList, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Modal from 'react-native-modal';
@@ -8,24 +9,30 @@ import { useHomeController } from './homeController';
 import { homeStyles as styles } from './homeStyles';
 
 export default function Home() {
-    const {pokemon, flatListRef, visiblePokemon, loading, isModalVisible, generations, selectedGens,
+    const { pokemon, flatListRef, visiblePokemon, loading, isModalVisible, generations, selectedGens,
         toggleGens, fetchAllPokemon, fetchPokemon, fetchSelected, togglePokemon, toggleShowAll, toggleModalVisible
     } = useHomeController()
-    
+
 
     return (
         <View style={styles.container}>
 
             <View style={styles.header}>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder='Digite o nome de um pokemon'
-                    value={pokemon}
-                    onChangeText={togglePokemon}
-                />
-                <TouchableOpacity style={styles.buttonSend} onPress={() => { fetchPokemon(); toggleShowAll(false) }}>
-                    <Text>Enviar</Text>
-                </TouchableOpacity>
+
+                <DrawerToggleButton tintColor='black' />
+
+                <View style={styles.search}>
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder='Digite o nome de um pokemon'
+                        value={pokemon}
+                        onChangeText={togglePokemon}
+                    />
+                    <TouchableOpacity style={styles.buttonSend} onPress={() => { fetchPokemon(); toggleShowAll(false) }}>
+                        <Text>Enviar</Text>
+                    </TouchableOpacity>
+                </View>
+
             </View>
 
             <View style={styles.options}>
@@ -44,7 +51,7 @@ export default function Home() {
                 style={{ backgroundColor: "#e4e4e4ff" }}
                 data={visiblePokemon}
                 keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => <ShowPokemon id={item.id} toggle={() => router.push({ pathname: '/details', params: { id: item.id.toString() } })} />}
+                renderItem={({ item }) => <ShowPokemon id={item.name.toString()} toggle={() => router.push({ pathname: '/details', params: { id: item.name.toString() } })} />}
                 numColumns={3}
                 onEndReached={fetchAllPokemon}
                 ListFooterComponent={loading ? <ActivityIndicator size="large" style={styles.loading} /> : null}
