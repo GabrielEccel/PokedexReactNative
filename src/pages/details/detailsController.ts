@@ -118,7 +118,7 @@ export function useDetailsController() {
     function toggleFavorite() {
         if (!pokemon) return;
 
-        const pokeID = Number(id)
+        const pokeID = pokemon.id
 
         if (favorites.some(p => p.id === pokeID)) {
             setFavorites(favorites.filter(favId => favId.id !== pokeID))
