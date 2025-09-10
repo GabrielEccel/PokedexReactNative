@@ -13,7 +13,6 @@ export function useShowController(id: string){
     async function buildPokemon() {
         if (!id) return;
         try {
-            console.log(id)
             const responseSpecies = await getPokemonSpecies(id)
             const responsePokemon = await getPokemon(responseSpecies.id)
             setPokemon(responsePokemon)

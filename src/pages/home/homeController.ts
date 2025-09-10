@@ -53,7 +53,6 @@ export function useHomeController() {
         }
     }, [loading]);
 
-
     const fetchPokemon = async () => {
         setVisiblePokemon([]);
 
