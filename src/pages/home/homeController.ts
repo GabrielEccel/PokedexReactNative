@@ -159,6 +159,7 @@ export function useHomeController() {
 
     function togglePokemon(pokemon: string) {
         setPokemon(pokemon)
+        setSelectedGens([]);
     }
 
     function toggleShowAll(bool: boolean) {

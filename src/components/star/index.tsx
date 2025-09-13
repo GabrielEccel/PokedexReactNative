@@ -1,4 +1,4 @@
-import { AntDesign } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 import { TouchableOpacity, View } from 'react-native';
 
 interface Starprops{
@@ -10,7 +10,7 @@ export default function Star({checked, onToogle}: Starprops) {
  return (
    <View>
     <TouchableOpacity onPress={onToogle}>
-      <AntDesign name={checked ? 'star': 'staro'} size={24} color={checked? 'gold': '#000'}/>
+      <FontAwesome name={checked ? 'star': 'star-o'} size={24} color={checked? 'gold': '#000'}/>
     </TouchableOpacity>
    </View>
   );
